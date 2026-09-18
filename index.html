@@ -7,118 +7,170 @@
 
 <style>
 *{box-sizing:border-box}
+
 body{
  margin:0;
  font-family:Arial,sans-serif;
  background:#f3f3f3;
  color:#222;
 }
+
 header{
  background:#111;
  color:white;
  text-align:center;
  padding:28px 15px;
 }
-header h1{margin:0;font-size:32px}
-header p{margin:10px 0 0;color:#bbb;font-size:17px}
+
+header h1{
+ margin:0;
+ font-size:32px;
+}
+
+header p{
+ margin:9px 0 0;
+ color:#bbb;
+ font-size:17px;
+}
 
 .card{
  background:white;
- margin:20px 16px;
+ margin:18px 15px;
  padding:22px;
  border-radius:24px;
  box-shadow:0 5px 20px #00000012;
 }
-h2{margin-top:0;font-size:25px}
+
+h2{
+ margin:0 0 20px;
+ font-size:25px;
+}
 
 label{
  display:block;
- margin-top:16px;
- margin-bottom:7px;
+ margin:14px 0 7px;
  color:#666;
  font-size:16px;
 }
+
 input,select{
  width:100%;
- padding:16px;
+ padding:15px;
  border:1px solid #ddd;
- border-radius:14px;
+ border-radius:13px;
  font-size:18px;
  background:#f8f8f8;
 }
+
 button{
  width:100%;
  border:0;
- border-radius:15px;
- padding:17px;
- margin-top:18px;
+ border-radius:14px;
+ padding:16px;
+ margin-top:16px;
  font-size:18px;
  font-weight:bold;
  background:#111;
  color:white;
 }
-button:active{transform:scale(.98)}
+
+button:active{
+ transform:scale(.98);
+}
+
+.row{
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
+}
 
 .preview{
  background:#eee;
  border-radius:18px;
- padding:30px 15px;
+ padding:28px 12px;
  text-align:center;
- overflow:hidden;
 }
 
 .cabinet{
+ width:min(100%,440px);
+ height:230px;
  margin:auto;
- width:min(100%,420px);
- height:220px;
  border:12px solid #555;
- background:#fafafa;
+ background:#eee;
  display:flex;
  position:relative;
- box-shadow:0 8px 15px #0002;
+ overflow:hidden;
 }
+
 .door{
  flex:1;
- border:3px solid #aaa;
  position:relative;
- background:#f8f8f8;
+ border:3px solid #aaa;
+ background:#fff;
 }
-.door:after{
- content:"";
+
+.handle{
  position:absolute;
- width:9px;
- height:65px;
- background:#c9a227;
+ width:8px;
+ height:55px;
  top:50%;
  transform:translateY(-50%);
- border-radius:3px;
+ background:#c9a227;
+ border-radius:4px;
 }
-.door:first-child:after{right:16px}
-.door:last-child:after{left:16px}
+
+.left .handle{right:15px}
+.right .handle{left:15px}
+
+.drawer{
+ position:absolute;
+ left:20%;
+ right:20%;
+ height:28px;
+ border:3px solid #888;
+ background:#ddd;
+}
+
+.d1{top:22px}
+.d2{top:58px}
+
+.measure{
+ margin-top:18px;
+ font-size:17px;
+ color:#555;
+}
 
 .price{
  text-align:center;
- font-size:35px;
+ font-size:34px;
  font-weight:bold;
- margin:18px 0;
+ margin:15px 0;
 }
+
 .info{
  background:#f5f5f5;
  padding:14px;
- border-radius:14px;
+ border-radius:13px;
  line-height:1.7;
 }
+
 .menu{
  display:grid;
  grid-template-columns:1fr 1fr;
  gap:12px;
 }
+
 .menu button{
  margin:0;
  background:#eee;
  color:#222;
 }
-.gold{color:#b38b00}
+
+.small{
+ font-size:14px;
+ color:#777;
+ margin-top:10px;
+}
 </style>
 </head>
 
@@ -130,6 +182,7 @@ button:active{transform:scale(.98)}
 </header>
 
 <div class="card">
+
 <h2>📐 Mebel o‘lchamlari</h2>
 
 <label>Uzunligi (mm)</label>
@@ -141,162 +194,394 @@ button:active{transform:scale(.98)}
 <label>Chuqurligi (mm)</label>
 <input id="depth" type="number" value="600">
 
-<button onclick="draw()">Mebelni chizish</button>
+<div class="row">
+
+<div>
+<label>Eshiklar</label>
+<select id="doors">
+<option value="2">2 ta</option>
+<option value="1">1 ta</option>
+<option value="3">3 ta</option>
+<option value="4">4 ta</option>
+</select>
 </div>
 
-<div class="card">
-<h2>🎨 Material va rang</h2>
+<div>
+<label>Tortmalar</label>
+<select id="drawers">
+<option value="0">Yo‘q</option>
+<option value="1">1 ta</option>
+<option value="2">2 ta</option>
+<option value="3">3 ta</option>
+<option value="4">4 ta</option>
+</select>
+</div>
 
-<label>Fasad</label>
-<select id="facade" onchange="draw()">
-<option>Oq</option>
-<option>Ivory</option>
-<option>Light Grey</option>
-<option>Wood</option>
-<option>Black</option>
+</div>
+
+<button onclick="drawFurniture()">🪑 Mebelni chizish</button>
+
+</div>
+
+
+<div class="card">
+
+<h2>🎨 Fasad va material</h2>
+
+<label>Fasad rangi</label>
+
+<select id="facade" onchange="drawFurniture()">
+<option value="white">Oq</option>
+<option value="ivory">Slonovaya kost</option>
+<option value="gray">Och kulrang</option>
+<option value="wood">Yog‘och</option>
+<option value="black">Qora</option>
 </select>
 
+
 <label>Uslub</label>
-<select id="style" onchange="draw()">
+
+<select id="style" onchange="drawFurniture()">
 <option>Neoklassika</option>
 <option>Modern</option>
 <option>Minimalizm</option>
 </select>
 
+
 <label>Ruchka</label>
-<select id="handle" onchange="draw()">
-<option>Tilla</option>
-<option>Qora</option>
-<option>Chrome</option>
+
+<select id="handle" onchange="drawFurniture()">
+<option value="gold">Tilla</option>
+<option value="black">Qora</option>
+<option value="chrome">Xrom</option>
 </select>
+
+
+<label>Material</label>
+
+<select id="material" onchange="calculate()">
+<option value="mdf">MDF</option>
+<option value="ldsp">LDSP</option>
+<option value="wood">Massiv yog‘och</option>
+</select>
+
 </div>
 
+
 <div class="card">
+
 <h2>🪑 Mebel ko‘rinishi</h2>
 
 <div class="preview">
+
 <div class="cabinet" id="cabinet">
-<div class="door"></div>
-<div class="door"></div>
+
+<div class="door left">
+<div class="handle"></div>
 </div>
+
+<div class="door right">
+<div class="handle"></div>
 </div>
+
+</div>
+
+<div class="measure" id="measure">
+2200 × 800 × 600 mm
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h2>📋 Loyiha ma’lumotlari</h2>
 
 <div class="info" id="details">
-O‘lcham: 2200 × 800 × 600 mm
-</div>
+O‘lcham: 2200 × 800 × 600 mm<br>
+Eshiklar: 2 ta<br>
+Tortmalar: 0 ta<br>
+Fasad: Oq<br>
+Uslub: Neoklassika
 </div>
 
+</div>
+
+
 <div class="card">
+
 <h2>💰 Taxminiy hisob</h2>
 
-<div class="price" id="price">1 704 000 so‘m</div>
-
-<button onclick="calculate()">Narxni hisoblash</button>
+<div class="price" id="price">
+0 so‘m
 </div>
 
+<button onclick="calculate()">Narxni hisoblash</button>
+
+<p class="small">
+* Narx hozircha taxminiy hisoblanadi.
+</p>
+
+</div>
+
+
 <div class="card">
+
 <h2>📱 Nazeer-Mebel</h2>
 
 <div class="menu">
-<button onclick="scrollToTop()">📐 Chizma</button>
+
+<button onclick="topPage()">📐 Chizma</button>
+
 <button onclick="goMaterial()">🎨 Fasad</button>
+
 <button onclick="goMaterial()">📦 Material</button>
+
 <button onclick="saveProject()">💾 Saqlash</button>
+
 </div>
+
 </div>
+
 
 <script>
 
-function draw(){
+function get(id){
+ return document.getElementById(id);
+}
 
- let w=Number(document.getElementById("width").value)||0;
- let h=Number(document.getElementById("height").value)||0;
- let d=Number(document.getElementById("depth").value)||0;
 
- let facade=document.getElementById("facade").value;
- let handle=document.getElementById("handle").value;
+function drawFurniture(){
 
- let cabinet=document.getElementById("cabinet");
- let doors=document.querySelectorAll(".door");
+ let w=Number(get("width").value)||0;
+ let h=Number(get("height").value)||0;
+ let d=Number(get("depth").value)||0;
 
- if(facade==="Oq"){
-   doors.forEach(x=>x.style.background="#fafafa");
- }
- if(facade==="Ivory"){
-   doors.forEach(x=>x.style.background="#f1ead7");
- }
- if(facade==="Light Grey"){
-   doors.forEach(x=>x.style.background="#d8d8d8");
- }
- if(facade==="Wood"){
-   doors.forEach(x=>x.style.background="#b58b5a");
- }
- if(facade==="Black"){
-   doors.forEach(x=>x.style.background="#333");
- }
+ let doors=Number(get("doors").value)||2;
+ let drawers=Number(get("drawers").value)||0;
 
+ let facade=get("facade").value;
+ let style=get("style").value;
+ let handle=get("handle").value;
+
+ let cabinet=get("cabinet");
+
+ let doorColor="#fff";
  let handleColor="#c9a227";
- if(handle==="Qora") handleColor="#222";
- if(handle==="Chrome") handleColor="#aaa";
 
- document.documentElement.style.setProperty("--handle",handleColor);
+ if(facade==="ivory") doorColor="#f0e6d0";
+ if(facade==="gray") doorColor="#d6d6d6";
+ if(facade==="wood") doorColor="#b88a5a";
+ if(facade==="black") doorColor="#333";
 
- doors.forEach(x=>{
-   x.style.setProperty("--handle",handleColor);
- });
+ if(handle==="black") handleColor="#222";
+ if(handle==="chrome") handleColor="#aaa";
 
- document.getElementById("details").innerHTML=
- "O‘lcham: <b>"+w+" × "+h+" × "+d+
- " mm</b><br>Fasad: <b>"+facade+
- "</b><br>Ruchka: <b>"+handle+"</b>";
+ cabinet.innerHTML="";
+
+ for(let i=0;i<doors;i++){
+
+   let door=document.createElement("div");
+
+   door.className="door";
+
+   door.style.background=doorColor;
+
+   let handleDiv=document.createElement("div");
+
+   handleDiv.className="handle";
+
+   handleDiv.style.background=handleColor;
+
+   if(i < Math.ceil(doors/2)){
+      handleDiv.style.right="15px";
+   }else{
+      handleDiv.style.left="15px";
+   }
+
+   door.appendChild(handleDiv);
+
+   cabinet.appendChild(door);
+ }
+
+
+ for(let i=0;i<drawers;i++){
+
+   let drawer=document.createElement("div");
+
+   drawer.style.position="absolute";
+   drawer.style.left="25%";
+   drawer.style.right="25%";
+   drawer.style.height="27px";
+   drawer.style.top=(20+i*34)+"px";
+   drawer.style.border="3px solid #888";
+   drawer.style.background="#ddd";
+   drawer.style.zIndex="5";
+
+   cabinet.appendChild(drawer);
+ }
+
+
+ get("measure").innerText=
+ w+" × "+h+" × "+d+" mm";
+
+
+ get("details").innerHTML=
+ "📏 O‘lcham: <b>"+w+" × "+h+" × "+d+
+ " mm</b><br>"+
+ "🚪 Eshiklar: <b>"+doors+
+ " ta</b><br>"+
+ "🗄️ Tortmalar: <b>"+drawers+
+ " ta</b><br>"+
+ "🎨 Fasad: <b>"+getFacadeName()+
+ "</b><br>"+
+ "✨ Uslub: <b>"+style+
+ "</b><br>"+
+ "🪵 Material: <b>"+
+ getMaterialName()+"</b><br>"+
+ "🔩 Ruchka: <b>"+getHandleName()+
+ "</b>";
 
  calculate();
 }
 
+
+function getFacadeName(){
+
+ let v=get("facade").value;
+
+ if(v==="white") return "Oq";
+ if(v==="ivory") return "Slonovaya kost";
+ if(v==="gray") return "Och kulrang";
+ if(v==="wood") return "Yog‘och";
+ if(v==="black") return "Qora";
+
+ return v;
+}
+
+
+function getMaterialName(){
+
+ let v=get("material").value;
+
+ if(v==="mdf") return "MDF";
+ if(v==="ldsp") return "LDSP";
+ if(v==="wood") return "Massiv yog‘och";
+
+ return v;
+}
+
+
+function getHandleName(){
+
+ let v=get("handle").value;
+
+ if(v==="gold") return "Tilla";
+ if(v==="black") return "Qora";
+ if(v==="chrome") return "Xrom";
+
+ return v;
+}
+
+
 function calculate(){
 
- let w=Number(document.getElementById("width").value)||0;
- let h=Number(document.getElementById("height").value)||0;
- let d=Number(document.getElementById("depth").value)||0;
+ let w=Number(get("width").value)||0;
+ let h=Number(get("height").value)||0;
+ let d=Number(get("depth").value)||0;
 
- if(w<=0||h<=0||d<=0){
-   document.getElementById("price").innerText="0 so‘m";
+ let doors=Number(get("doors").value)||2;
+ let drawers=Number(get("drawers").value)||0;
+
+ if(w<=0 || h<=0 || d<=0){
+   get("price").innerText="0 so‘m";
    return;
  }
 
+
+ let material=get("material").value;
+
+ let materialPrice=550000;
+
+ if(material==="ldsp") materialPrice=430000;
+ if(material==="wood") materialPrice=950000;
+
+
  let area=(w*h)/1000000;
- let base=850000;
- let material=area*550000;
- let depthAdd=d>600?100000:0;
 
- let total=Math.round(base+material+depthAdd);
+ let base=650000;
 
- document.getElementById("price").innerText=
+ let bodyPrice=area*materialPrice;
+
+ let doorPrice=doors*120000;
+
+ let drawerPrice=drawers*90000;
+
+ let depthPrice=d>600?150000:0;
+
+
+ let total=Math.round(
+   base+
+   bodyPrice+
+   doorPrice+
+   drawerPrice+
+   depthPrice
+ );
+
+
+ get("price").innerText=
  total.toLocaleString("uz-UZ")+" so‘m";
 }
 
+
 function saveProject(){
- localStorage.setItem("nazeerProject",JSON.stringify({
-   width:width.value,
-   height:height.value,
-   depth:depth.value,
-   facade:facade.value,
-   style:style.value,
-   handle:handle.value
- }));
+
+ let project={
+   width:get("width").value,
+   height:get("height").value,
+   depth:get("depth").value,
+   doors:get("doors").value,
+   drawers:get("drawers").value,
+   facade:get("facade").value,
+   style:get("style").value,
+   handle:get("handle").value,
+   material:get("material").value
+ };
+
+
+ localStorage.setItem(
+   "nazeerProject",
+   JSON.stringify(project)
+ );
+
+
  alert("Loyiha saqlandi ✅");
 }
 
-function scrollToTop(){
- window.scrollTo({top:0,behavior:"smooth"});
+
+function topPage(){
+
+ window.scrollTo({
+   top:0,
+   behavior:"smooth"
+ });
+
 }
+
 
 function goMaterial(){
- document.querySelector(".card:nth-of-type(2)")
- .scrollIntoView({behavior:"smooth"});
+
+ document.querySelectorAll(".card")[1]
+ .scrollIntoView({
+   behavior:"smooth"
+ });
+
 }
 
-draw();
+
+drawFurniture();
 
 </script>
 
