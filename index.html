@@ -1,423 +1,304 @@
 <!DOCTYPE html>
-
 <html lang="uz">
-
 <head>
-
 <meta charset="UTF-8">
-
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Nazeer-Mebel</title>
 
 <style>
-
 *{box-sizing:border-box}
-
 body{
-
-  margin:0;
-
-  font-family:Arial,sans-serif;
-
-  background:#f5f5f5;
-
-  color:#222;
-
+ margin:0;
+ font-family:Arial,sans-serif;
+ background:#f3f3f3;
+ color:#222;
 }
-
 header{
-
-  background:#111;
-
-  color:white;
-
-  padding:20px;
-
-  text-align:center;
-
+ background:#111;
+ color:white;
+ text-align:center;
+ padding:28px 15px;
 }
-
-header h1{margin:0;font-size:28px}
-
-header p{margin:7px 0 0;color:#bbb}
-
-.container{
-
-  max-width:700px;
-
-  margin:auto;
-
-  padding:18px;
-
-}
+header h1{margin:0;font-size:32px}
+header p{margin:10px 0 0;color:#bbb;font-size:17px}
 
 .card{
-
-  background:white;
-
-  border-radius:18px;
-
-  padding:20px;
-
-  margin-bottom:18px;
-
-  box-shadow:0 3px 15px #0001;
-
+ background:white;
+ margin:20px 16px;
+ padding:22px;
+ border-radius:24px;
+ box-shadow:0 5px 20px #00000012;
 }
-
-h2{margin-top:0}
-
-.inputs{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr 1fr;
-
-  gap:10px;
-
-}
+h2{margin-top:0;font-size:25px}
 
 label{
-
-  font-size:13px;
-
-  color:#666;
-
+ display:block;
+ margin-top:16px;
+ margin-bottom:7px;
+ color:#666;
+ font-size:16px;
 }
-
 input,select{
-
-  width:100%;
-
-  padding:13px;
-
-  margin-top:5px;
-
-  border:1px solid #ddd;
-
-  border-radius:10px;
-
-  font-size:16px;
-
+ width:100%;
+ padding:16px;
+ border:1px solid #ddd;
+ border-radius:14px;
+ font-size:18px;
+ background:#f8f8f8;
 }
-
 button{
-
-  width:100%;
-
-  padding:15px;
-
-  margin-top:15px;
-
-  border:0;
-
-  border-radius:12px;
-
-  background:#111;
-
-  color:white;
-
-  font-size:17px;
-
-  font-weight:bold;
-
+ width:100%;
+ border:0;
+ border-radius:15px;
+ padding:17px;
+ margin-top:18px;
+ font-size:18px;
+ font-weight:bold;
+ background:#111;
+ color:white;
 }
+button:active{transform:scale(.98)}
 
 .preview{
-
-  height:260px;
-
-  background:#eee;
-
-  border-radius:15px;
-
-  display:flex;
-
-  justify-content:center;
-
-  align-items:center;
-
-  overflow:hidden;
-
+ background:#eee;
+ border-radius:18px;
+ padding:30px 15px;
+ text-align:center;
+ overflow:hidden;
 }
 
 .cabinet{
-
-  width:65%;
-
-  height:65%;
-
-  background:#eee;
-
-  border:8px solid #555;
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
+ margin:auto;
+ width:min(100%,420px);
+ height:220px;
+ border:12px solid #555;
+ background:#fafafa;
+ display:flex;
+ position:relative;
+ box-shadow:0 8px 15px #0002;
 }
-
 .door{
-
-  border:2px solid #999;
-
-  position:relative;
-
+ flex:1;
+ border:3px solid #aaa;
+ position:relative;
+ background:#f8f8f8;
 }
-
-.handle{
-
-  width:5px;
-
-  height:35px;
-
-  background:#c9a227;
-
-  position:absolute;
-
-  right:10px;
-
-  top:50%;
-
+.door:after{
+ content:"";
+ position:absolute;
+ width:9px;
+ height:65px;
+ background:#c9a227;
+ top:50%;
+ transform:translateY(-50%);
+ border-radius:3px;
 }
+.door:first-child:after{right:16px}
+.door:last-child:after{left:16px}
 
 .price{
-
-  font-size:28px;
-
-  font-weight:bold;
-
-  text-align:center;
-
-  margin-top:15px;
-
+ text-align:center;
+ font-size:35px;
+ font-weight:bold;
+ margin:18px 0;
 }
-
+.info{
+ background:#f5f5f5;
+ padding:14px;
+ border-radius:14px;
+ line-height:1.7;
+}
 .menu{
-
-  display:grid;
-
-  grid-template-columns:1fr 1fr;
-
-  gap:10px;
-
+ display:grid;
+ grid-template-columns:1fr 1fr;
+ gap:12px;
 }
-
 .menu button{
-
-  margin:0;
-
-  background:#eee;
-
-  color:#222;
-
+ margin:0;
+ background:#eee;
+ color:#222;
 }
-
-@media(max-width:500px){
-
-  .inputs{grid-template-columns:1fr}
-
-}
-
+.gold{color:#b38b00}
 </style>
-
 </head>
 
 <body>
 
 <header>
-
-  <h1>NAZEER-MEBEL</h1>
-
-  <p>3D mebel loyihalash va hisob-kitob</p>
-
+<h1>NAZEER-MEBEL</h1>
+<p>3D mebel loyihalash va hisob-kitob</p>
 </header>
 
-<div class="container">
-
 <div class="card">
-
 <h2>📐 Mebel o‘lchamlari</h2>
 
-<div class="inputs">
-
-<div>
-
 <label>Uzunligi (mm)</label>
-
 <input id="width" type="number" value="2200">
 
-</div>
-
-<div>
-
-<label>Balandligi (mm)</label>
-
+<label>Balandiigi (mm)</label>
 <input id="height" type="number" value="800">
 
-</div>
-
-<div>
-
 <label>Chuqurligi (mm)</label>
-
 <input id="depth" type="number" value="600">
 
-</div>
-
-</div>
-
 <button onclick="draw()">Mebelni chizish</button>
-
 </div>
 
 <div class="card">
-
 <h2>🎨 Material va rang</h2>
 
 <label>Fasad</label>
-
-<select id="color" onchange="changeColor()">
-
-<option value="#eeeeee">Oq</option>
-
-<option value="#ddd8cc">Slonovaya kost</option>
-
-<option value="#bdbdbd">Och kulrang</option>
-
-<option value="#8b7355">Yog‘och</option>
-
-<option value="#222222">Qora</option>
-
+<select id="facade" onchange="draw()">
+<option>Oq</option>
+<option>Ivory</option>
+<option>Light Grey</option>
+<option>Wood</option>
+<option>Black</option>
 </select>
 
 <label>Uslub</label>
-
-<select>
-
+<select id="style" onchange="draw()">
 <option>Neoklassika</option>
-
-<option>Zamonaviy</option>
-
+<option>Modern</option>
 <option>Minimalizm</option>
-
 </select>
 
+<label>Ruchka</label>
+<select id="handle" onchange="draw()">
+<option>Tilla</option>
+<option>Qora</option>
+<option>Chrome</option>
+</select>
 </div>
 
 <div class="card">
-
 <h2>🪑 Mebel ko‘rinishi</h2>
 
 <div class="preview">
-
 <div class="cabinet" id="cabinet">
-
-<div class="door"><div class="handle"></div></div>
-
-<div class="door"><div class="handle"></div></div>
-
+<div class="door"></div>
+<div class="door"></div>
+</div>
 </div>
 
+<div class="info" id="details">
+O‘lcham: 2200 × 800 × 600 mm
 </div>
-
 </div>
 
 <div class="card">
-
 <h2>💰 Taxminiy hisob</h2>
 
-<div class="price" id="price">0 so‘m</div>
+<div class="price" id="price">1 704 000 so‘m</div>
 
 <button onclick="calculate()">Narxni hisoblash</button>
-
 </div>
 
 <div class="card">
-
 <h2>📱 Nazeer-Mebel</h2>
 
 <div class="menu">
-
-<button>📐 Chizma</button>
-
-<button>🎨 Fasad</button>
-
-<button>📦 Material</button>
-
-<button>💾 Saqlash</button>
-
+<button onclick="scrollToTop()">📐 Chizma</button>
+<button onclick="goMaterial()">🎨 Fasad</button>
+<button onclick="goMaterial()">📦 Material</button>
+<button onclick="saveProject()">💾 Saqlash</button>
 </div>
-
-</div>
-
 </div>
 
 <script>
 
 function draw(){
 
-  let w=document.getElementById("width").value;
+ let w=Number(document.getElementById("width").value)||0;
+ let h=Number(document.getElementById("height").value)||0;
+ let d=Number(document.getElementById("depth").value)||0;
 
-  let h=document.getElementById("height").value;
+ let facade=document.getElementById("facade").value;
+ let handle=document.getElementById("handle").value;
 
-  let cabinet=document.getElementById("cabinet");
+ let cabinet=document.getElementById("cabinet");
+ let doors=document.querySelectorAll(".door");
 
-  let ratio=w/h;
+ if(facade==="Oq"){
+   doors.forEach(x=>x.style.background="#fafafa");
+ }
+ if(facade==="Ivory"){
+   doors.forEach(x=>x.style.background="#f1ead7");
+ }
+ if(facade==="Light Grey"){
+   doors.forEach(x=>x.style.background="#d8d8d8");
+ }
+ if(facade==="Wood"){
+   doors.forEach(x=>x.style.background="#b58b5a");
+ }
+ if(facade==="Black"){
+   doors.forEach(x=>x.style.background="#333");
+ }
 
-  if(ratio>2.5){
+ let handleColor="#c9a227";
+ if(handle==="Qora") handleColor="#222";
+ if(handle==="Chrome") handleColor="#aaa";
 
-    cabinet.style.width="85%";
+ document.documentElement.style.setProperty("--handle",handleColor);
 
-    cabinet.style.height="50%";
+ doors.forEach(x=>{
+   x.style.setProperty("--handle",handleColor);
+ });
 
-  }else{
+ document.getElementById("details").innerHTML=
+ "O‘lcham: <b>"+w+" × "+h+" × "+d+
+ " mm</b><br>Fasad: <b>"+facade+
+ "</b><br>Ruchka: <b>"+handle+"</b>";
 
-    cabinet.style.width="65%";
-
-    cabinet.style.height="65%";
-
-  }
-
-}
-
-function changeColor(){
-
-  let color=document.getElementById("color").value;
-
-  document.querySelectorAll(".door").forEach(function(door){
-
-    door.style.background=color;
-
-  });
-
+ calculate();
 }
 
 function calculate(){
 
-  let w=Number(document.getElementById("width").value);
+ let w=Number(document.getElementById("width").value)||0;
+ let h=Number(document.getElementById("height").value)||0;
+ let d=Number(document.getElementById("depth").value)||0;
 
-  let h=Number(document.getElementById("height").value);
+ if(w<=0||h<=0||d<=0){
+   document.getElementById("price").innerText="0 so‘m";
+   return;
+ }
 
-  let d=Number(document.getElementById("depth").value);
+ let area=(w*h)/1000000;
+ let base=850000;
+ let material=area*550000;
+ let depthAdd=d>600?100000:0;
 
-  let area=(w/1000)*(h/1000);
+ let total=Math.round(base+material+depthAdd);
 
-  let price=area*900000 + (d/1000)*200000;
+ document.getElementById("price").innerText=
+ total.toLocaleString("uz-UZ")+" so‘m";
+}
 
-  document.getElementById("price").innerText=
+function saveProject(){
+ localStorage.setItem("nazeerProject",JSON.stringify({
+   width:width.value,
+   height:height.value,
+   depth:depth.value,
+   facade:facade.value,
+   style:style.value,
+   handle:handle.value
+ }));
+ alert("Loyiha saqlandi ✅");
+}
 
-    Math.round(price).toLocaleString("ru-RU")+" so‘m";
+function scrollToTop(){
+ window.scrollTo({top:0,behavior:"smooth"});
+}
 
+function goMaterial(){
+ document.querySelector(".card:nth-of-type(2)")
+ .scrollIntoView({behavior:"smooth"});
 }
 
 draw();
 
-changeColor();
-
 </script>
 
 </body>
-
 </html>
